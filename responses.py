@@ -1,3 +1,4 @@
+import random
 import re
 
 
@@ -19,12 +20,25 @@ def process_message(message, response_array, response):
 def get_response(message):
     # Add your custom responses here
     response_list = [
-        process_message(message, ['hello', 'hi', 'hey'], 'Hey there!'),
-        process_message(message, ['bye', 'goodbye'], 'Goodbye!'),
-        process_message(message, ['how', 'are', 'you'], 'I\'m doing fine thanks!'),
-        process_message(message, ['your', 'name'], 'My name is Devu, nice to meet you!'),
-        process_message(message, ['help', 'me'], 'I will do my best to assist you!')
-        # Add more responses here
+        process_message(message, ['hello', 'hi', 'hey','hai'],    random.choice(['HI!','Hello','Whatsup','Hehe','Hloo'])),
+        process_message(message, ['bye', 'goodbye'],        random.choice(['Goodbye!'])),
+        process_message(message, ['how', 'are', 'you'],     random.choice(['I\'m doing fine thanks!'])),
+        process_message(message, ['your', 'name'],          random.choice(['My name is Devu, nice to meet you!'])),
+        process_message(message, ['help', 'me'],            random.choice(['I will do my best to assist you!']))
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        #
     ]
 
     # Checks all of the response scores and returns the best matching response
@@ -39,12 +53,15 @@ def get_response(message):
     # Return the matching response to the user
     if winning_response == 0:
         bot_response = 'I didn\'t understand what you wrote.'
+        trainingdata = open("training.txt", "w")
+        questions = [message,"\n"]
+        trainingdata.writelines(questions)
+        trainingdata.close()
     else:
         bot_response = matching_response[1]
 
     print('Bot response:', bot_response)
     return bot_response
 
-# Test your system
-# get_response('What is your name bruv?')
-# get_response('Can you help me with something please?')
+
+
