@@ -22,11 +22,12 @@ def get_response(message):
     response_list = [
         process_message(message, ['hello', 'hi', 'hey','hai'],    random.choice(['HI!','Hello','Whatsup','Hehe','Hloo'])),
         process_message(message, ['bye', 'goodbye'],        random.choice(['Goodbye!'])),
-        process_message(message, ['how', 'are', 'you'],     random.choice(['I\'m doing fine thanks!'])),
+        process_message(message, ['how', 'are', 'you'],     random.choice(['Sugham ','Fine , ninko?'])),
         process_message(message, ['your', 'name'],          random.choice(['My name is Devu, nice to meet you!'])),
-        process_message(message, ['help', 'me'],            random.choice(['I will do my best to assist you!']))
-        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
-        #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
+        process_message(message, ['help', 'me'],            random.choice(['I will do my best to assist you!'])),
+        process_message(message, ['hmm', 'mm'], random.choice(['pinne','vere entha ppd?'])),
+        process_message(message, ['entha'], random.choice(['enth?','entha'])),
+        process_message(message, ['enth'], random.choice(['onnula'])),
         #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
         #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
         #process_message(message, ['bye', 'goodbye'], random.choice(['Goodbye!'])),
@@ -53,7 +54,7 @@ def get_response(message):
     # Return the matching response to the user
     if winning_response == 0:
         bot_response = 'I didn\'t understand what you wrote.'
-        trainingdata = open("training.txt", "w")
+        trainingdata = open("training.txt", "a")
         questions = [message,"\n"]
         trainingdata.writelines(questions)
         trainingdata.close()
