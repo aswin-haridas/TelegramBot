@@ -1,6 +1,14 @@
-Do you know a joke? / You’re funny!
-Do you love me? / I love you
-Will you marry me? / Are you single?
+Do you know a joke?
+{puts random joke on internet}
+You’re funny!
+hehe 
+Do you love me?
+yes.....but as a friend
+ I love you
+aww....me too
+Will you marry me?
+na u deserve better
+Are you single?
 Do you like people?
 Does Santa Claus exist?
 Are you part of the Matrix?
