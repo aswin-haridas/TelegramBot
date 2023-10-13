@@ -1,56 +1,30 @@
-import logging
-from telegram.ext import *
-import responses
+from typing import Final
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-API_KEY = '2026162016:AAFokGiP3YTuDDI0z0y4Z1BIy4Cb_ecTagc'
+Token: Final = "6562783629:AAEV9JctbDN-awGIK9RS8gyLPShsfCZ06lY"  # Replace with your actual bot token
 
-# Set up the logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-logging.info('Starting Bot...')
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("hi")
 
+def handle_response(text: str) -> str:
+    return text  # Return the same text that is received
 
-def start_command(update, context):
-    update.message.reply_text('Hello there! I\'m a bot. What\'s up?')
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    message_type: str = update.message.chat.type
+    text: str = update.message.text
+    print(f'User ({update.message.chat.id}) in {message_type}: "{text}"')
+    response = handle_response(text)
+    await update.message.reply_text(response)
 
+async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print(f'Update {update} caused error {context.error}')
 
-def help_command(update, context):
-    update.message.reply_text('Try typing anything and I will do my best to respond!')
-
-
-def custom_command(update, context):
-    update.message.reply_text('This is a custom command, you can add whatever text you want here.')
-
-
-def handle_message(update, context):
-    text = str(update.message.text).lower()
-    logging.info(f'User ({update.message.chat.id}) says: {text}')
-
-    # Bot response
-    response = responses.get_response(text)
-    update.message.reply_text(response)
-
-
-def error(update, context):
-    # Logs errors
-    logging.error(f'Update {update} caused error {context.error}')
-
-
-# Run the programme
 if __name__ == '__main__':
-    updater = Updater(API_KEY, use_context=True)
-    dp = updater.dispatcher
-
-    # Commands
-    dp.add_handler(CommandHandler('start', start_command))
-    dp.add_handler(CommandHandler('help', help_command))
-    dp.add_handler(CommandHandler('custom', custom_command))
-
-    # Messages
-    dp.add_handler(MessageHandler(Filters.text, handle_message))
-
-    # Log all errors
-    dp.add_error_handler(error)
-
-    # Run the bot
-    updater.start_polling(3.0)
-    updater.idle()
+    print('Starting bot...')
+    app = Application.builder().token(Token).build()
+    app.add_handler(CommandHandler('start', start))
+    app.add_handler(MessageHandler(filters.TEXT , handle_message))
+    app.add_error_handler(error)
+    print('Polling...')
+    app.run_polling(poll_interval=1)
